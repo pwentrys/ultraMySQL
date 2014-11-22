@@ -4,11 +4,24 @@ import umysql
 from config.configuration import SQL
 
 
-class MySQL_Connection():
+class uMySQL_Connection():
     def __init__(self):
+        """
+        Pass.
+        :return:
+        """
         pass
 
     def execute_query(self, server, query):
+        """
+        Get attempts connection to server.
+        If successful -> run query and return result.
+        If error -> return error.
+        Close connection to server.
+        :param server:
+        :param query:
+        :return:
+        """
         result = 'None'
         cnn = umysql.Connection()
 
@@ -22,8 +35,8 @@ class MySQL_Connection():
             )
 
             result = cnn.query(query)
+            return result
         except Exception as error:
-            print error
-
-        cnn.close()
-        return result
+            return error
+        finally:
+            cnn.close()
